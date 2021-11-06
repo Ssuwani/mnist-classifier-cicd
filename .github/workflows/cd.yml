@@ -62,7 +62,7 @@ jobs:
     - name: Edit deployment yaml with SHA tag
       uses: mikefarah/yq@master
       with:
-        cmd: yq e -i '.spec.template.spec.containers[0].image = "ssuwani/mnist_classifier_bentoml:$GITHUB_SHA"' deploy/deployment.yaml
+        cmd: TAG=$GITHUB_SHA yq e -i '.spec.template.spec.containers[0].image = "ssuwani/mnist_classifier_bentoml:strenv(TAG)"' deploy/deployment.yaml
     - name: Commit files
       run: |
         git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
