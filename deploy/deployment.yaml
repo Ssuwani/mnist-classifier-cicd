@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    labels:
+        app: mnist-classifier
+    name: mnist-classifier
+spec:
+    selector:
+        matchLabels:
+            app: mnist-classifier
+    template:
+        metadata:
+            labels:
+                app: mnist-classifier
+        spec:
+            containers:
+            - image: ssuwani/mnist_classifier_bentoml:v2
+              imagePullPolicy: Always
+              name: mnist-classifier
+              ports:
+              - containerPort: 5000
+

@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: mnist-train-linear-job
+  namespace: mnist-classifier
+spec:
+  template:
+    spec:
+      containers:
+      - name: mnist-train-linear
+        image: gcr.io/abstract-flame-330901/mnist_train_linear
+        args: ["--num_neurons", "128", "--learning_rate",  "0.001", "--output_model_path", "gs://suwan/mnist_model_demo2"] 
+      restartPolicy: Never
+  backoffLimit: 4
+
