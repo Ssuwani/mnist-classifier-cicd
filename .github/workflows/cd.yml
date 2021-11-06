@@ -23,6 +23,12 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
+    - uses: actions-hub/gcloud@master
+      env:
+        PROJECT_ID: ${{ secrets.GKE_PROJECT }}
+        APPLICATION_CREDENTIALS: ${{ secrets.GKE_SA_KEY }}
+      with:
+        args: info
     # Setup gcloud CLI
     - uses: google-github-actions/setup-gcloud@v0.2.0
       with:
