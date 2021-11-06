@@ -46,7 +46,7 @@ jobs:
           --tag "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA" \
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
           --build-arg GITHUB_REF="$GITHUB_REF" \
-          deploy_on_bentoml/train_linear/
+          train_linear/
 
     # Push the Docker image to Google Container Registry
     - name: Publish
@@ -55,7 +55,7 @@ jobs:
 
     - name: Run Training Job
       run: |-
-        kubectl apply -f deploy_on_bentoml/mnist_train_linear_job.yaml
+        kubectl apply -f mnist_train_linear_job.yaml
 #     # Set up kustomize
 #     - name: Set up Kustomize
 #       run: |-
