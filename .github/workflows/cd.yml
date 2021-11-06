@@ -59,6 +59,10 @@ jobs:
       run: docker build -t ssuwani/mnist_classifier_bentoml:$GITHUB_SHA $SAVED_PATH
     - name: Push
       run: docker push ssuwani/mnist_classifier_bentoml:$GITHUB_SHA
+    - name: Edit deployment yaml with SHA tag
+      uses: mikefarah/yq@master
+      with:
+        cmd: yq e -i '.spec.template.spec.containers[0].image = "ssuwani/mnist_classifier_bentoml:$GITHUB_SHA"' deploy/deployment.yaml
     # - name: Build and Publish
     #   run: |
     #     echo 'EOF' >> $GITHUB_ENV
