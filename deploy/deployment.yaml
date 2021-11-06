@@ -14,7 +14,7 @@ spec:
         app: mnist-classifier
     spec:
       containers:
-        - image: ssuwani/mnist_classifier_bentoml:$GITHUB_SHA
+        - image: ssuwani/mnist_classifier_bentoml:strenv(TAG)
           imagePullPolicy: Always
           name: mnist-classifier
           ports:
