@@ -55,7 +55,7 @@ jobs:
 
     - name: Run Training Job
       run: |-
-        kubectl apply -f mnist_train_linear_job.yaml
+        kubectl apply -f train_linear_job.yaml
 #     # Set up kustomize
 #     - name: Set up Kustomize
 #       run: |-
