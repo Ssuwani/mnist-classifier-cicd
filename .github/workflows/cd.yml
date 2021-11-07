@@ -75,7 +75,7 @@ jobs:
       - name: Bento Packing
         run: python bentoml/bento_packer.py --model_path gs://suwan/mnist_$TAG
 
-      - name: Set saved_path
+      - name: Set ENV with BentoML saved path
         run: echo "SAVED_PATH=$(bentoml get MnistService:latest --print-location --quiet)" >> $GITHUB_ENV
 
       - name: Build BentoML Model
