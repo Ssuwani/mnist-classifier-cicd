@@ -23,6 +23,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
+    - name: Tag with GITHUB SHA
+      run: echo "TAG=`echo ${GITHUB_SHA} | cut -c1-8`"
+
     - uses: actions-hub/gcloud@master
       env:
         PROJECT_ID: ${{ secrets.GKE_PROJECT }}

@@ -21,6 +21,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
+    - name: Tag with GITHUB SHA
+      run: echo "TAG=`echo ${GITHUB_SHA} | cut -c1-8`"
+
     # Setup gcloud CLI
     - uses: google-github-actions/setup-gcloud@v0.2.0
       with:
