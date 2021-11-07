@@ -60,8 +60,8 @@ jobs:
       uses: mikefarah/yq@master
       with:
         cmd: |-
-        DIR="gs://suwan/mnist_$TAG" yq e -i '.spec.template.spec.containers[0].args[5] = env(DIR)' train_linear_job.yaml
-        JOB="mnist-train-linear-job-$TAG" yq e -i '.metadata.name = env(JOB)' train_linear_job.yaml
+          DIR="gs://suwan/mnist_$TAG" yq e -i '.spec.template.spec.containers[0].args[5] = env(DIR)' train_linear_job.yaml
+          JOB="mnist-train-linear-job-$TAG" yq e -i '.metadata.name = env(JOB)' train_linear_job.yaml
 
     - name: Run Training Job
       run: |-
