@@ -11,4 +11,4 @@ spec:
       targetPort: 5000
     selector:
       app: mnist-classifier
-    type: LoadBalancer
+    type: NodePort
