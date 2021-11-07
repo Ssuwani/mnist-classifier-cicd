@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: mnist-train-linear-job
-  namespace: mnist-classifier
+  namespace: mnist
 spec:
   template:
     spec:
