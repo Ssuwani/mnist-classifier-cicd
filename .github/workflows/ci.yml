@@ -8,7 +8,7 @@ env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: cluster-1
   GKE_ZONE: us-central1-a
-  IMAGE: mnist_train_linear
+  TRAIN_IMAGE: mnist_train_linear
 
 jobs:
   setup-build-publish-deploy:
@@ -44,7 +44,7 @@ jobs:
 
       # Build the Docker image
       - name: Build
-        run: docker build -t gcr.io/$PROJECT_ID/mnist_train_linear:$TAG train_linear
+        run: docker build -t gcr.io/$PROJECT_ID/$TRAIN_IMAGE:$TAG train_linear
         # run: |-
         #   docker build \
         #     --tag "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA" \
@@ -55,19 +55,19 @@ jobs:
       # Push the Docker image to Google Container Registry
       - name: Publish
         run: |-
-          docker push gcr.io/$PROJECT_ID/mnist_train_linear:$TAG
+          docker push gcr.io/$PROJECT_ID/$TRAIN_IMAGE:$TAG
 
       - name: Edit deployment yaml with SHA tag
         uses: mikefarah/yq@master
         with:
           cmd: |-
             JOBNAME="mnist-train-linear-job-$TAG" yq e -i '.metadata.name = env(JOBNAME)' train_linear_job.yaml
-            IMAGE="gcr.io/$PROJECT_ID/mnist_train_linear:$TAG" yq e -i '.spec.template.spec.containers[0].image = env(IMAGE)' train_linear_job.yaml
+            IMAGE="gcr.io/$PROJECT_ID/$TRAIN_IMAGE:$TAG" yq e -i '.spec.template.spec.containers[0].image = env(IMAGE)' train_linear_job.yaml
             DIR="gs://suwan/mnist_$TAG" yq e -i '.spec.template.spec.containers[0].args[5] = env(DIR)' train_linear_job.yaml
 
       - name: Run Training Job
         run: |-
-          kubectl apply -n mnist -f train_linear_job.yaml
+          kubectl apply -f train_linear_job.yaml
 
 #     # Set up kustomize
 #     - name: Set up Kustomize
