@@ -6,11 +6,11 @@ from bentoml import api, artifacts, env, BentoService
 from bentoml.frameworks.keras import KerasModelArtifact
 from bentoml.adapters import ImageInput
 
-@env(pip_packages=['tensorflow==2.7.0', 'pillow', 'numpy'])
-@artifacts([KerasModelArtifact('model')])
+
+@env(pip_packages=["tensorflow==2.7.0", "pillow", "numpy"])
+@artifacts([KerasModelArtifact("model")])
 class MnistService(BentoService):
-        
-    @api(input=ImageInput(pilmode='L'), batch=True)
+    @api(input=ImageInput(pilmode="L"), batch=True)
     def predict(self, imgs: List[np.ndarray]) -> List[str]:
         inputs = []
         for img in imgs:
@@ -20,4 +20,3 @@ class MnistService(BentoService):
         inputs = np.stack(inputs)
         results = self.artifacts.model.predict(inputs)
         return results
-
