@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - image: gcr.io/abstract-flame-330901/mnist_classifier_bentoml:d961dd5c
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           name: mnist-classifier
           ports:
             - containerPort: 5000
