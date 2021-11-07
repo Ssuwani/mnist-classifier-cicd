@@ -6,7 +6,7 @@ from bentoml import api, artifacts, env, BentoService
 from bentoml.frameworks.keras import KerasModelArtifact
 from bentoml.adapters import ImageInput
 
-@env(pip_packages=['tensorflow==2.6.0', 'pillow', 'numpy'])
+@env(pip_packages=['tensorflow==2.7.0', 'pillow', 'numpy'])
 @artifacts([KerasModelArtifact('model')])
 class MnistService(BentoService):
         
