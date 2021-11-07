@@ -52,6 +52,14 @@ jobs:
     - name: Publish
       run: |-
         docker push "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA"
+    
+    - name: Tag with GITHUB SHA
+      run: echo "TAG=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV
+
+    - name: Edit deployment yaml with SHA tag
+      uses: mikefarah/yq@master
+      with:
+        cmd: DIR="gs://suwan/mnist_$TAG" yq e -i '.spec.template.spec.containers[0].args[5] = env(DIR)' train_linear_job.yaml
 
     - name: Run Training Job
       run: |-
