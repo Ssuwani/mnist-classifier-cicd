@@ -55,10 +55,10 @@ jobs:
         uses: mikefarah/yq@master
         with:
           cmd: |-
-            JOBNAME="mnist-train-linear-job-$TAG" yq e -i '.metadata.name = env(JOBNAME)' /train/train_job.yaml
-            IMAGE="gcr.io/$PROJECT_ID/$TRAIN_IMAGE:$TAG" yq e -i '.spec.template.spec.containers[0].image = env(IMAGE)' /train/train_job.yaml
-            DIR="gs://suwan/mnist_$TAG" yq e -i '.spec.template.spec.containers[0].args[5] = env(DIR)' /train/train_job.yaml
+            JOBNAME="mnist-train-job-$TAG" yq e -i '.metadata.name = env(JOBNAME)' train/train_job.yaml
+            IMAGE="gcr.io/$PROJECT_ID/$TRAIN_IMAGE:$TAG" yq e -i '.spec.template.spec.containers[0].image = env(IMAGE)' train/train_job.yaml
+            DIR="gs://suwan/mnist_$TAG" yq e -i '.spec.template.spec.containers[0].args[5] = env(DIR)' train/train_job.yaml
 
       - name: Run Training Job
         run: |-
-          kubectl apply -f /train/train_job.yaml
+          kubectl apply -f train/train_job.yaml
