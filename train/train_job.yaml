@@ -11,6 +11,8 @@ spec:
           image: gcr.io/abstract-flame-330901/mnist_train
           args:
             [
+              "--ACCESS_TOKEN",
+              "access-token",
               "--num_neurons",
               "128",
               "--learning_rate",

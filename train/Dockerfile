@@ -5,4 +5,4 @@ ENV ACCESS_TOKEN=<ACCESS_TOKEN>
 ADD utils.py /mnist/train/utils.py
 ADD train.py /mnist/train/train.py
 
-ENTRYPOINT [ "python", "/mnist/train/train.py", "--ACCESS_TOKEN", ${ACCESS_TOKEN}]
+ENTRYPOINT [ "python", "/mnist/train/train.py" ]
