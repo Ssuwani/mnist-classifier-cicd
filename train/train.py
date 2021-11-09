@@ -42,7 +42,7 @@ def training(num_neurons, learning_rate, output_model_path):
         metrics=["acc"],
     )
 
-    model.fit(train_x, train_y, epochs=100)
+    model.fit(train_x, train_y, epochs=10)
 
     loss, acc = model.evaluate(test_x, test_y)
     print(f"model loss: {loss:.4f} acc: {acc*100:.4f}")

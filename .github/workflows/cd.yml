@@ -1,11 +1,18 @@
 name: CD
 
+# on:
+#   workflow_run:
+#     workflows: ["ci"]
+#     branches: [main]
+#     types:
+#       - completed
+
 on:
-  workflow_run:
-    workflows: ["ci"]
-    branches: [main]
-    types:
-      - completed
+  repository_dispatch:
+    types: [TRIGGER_API_TEST]
+    #repository_dispatch가 발생할 때, 이 Action이 실행됩니다.
+    #여기서 types란, 위에서 설명한 endpoint의 payload의 event_type입니다.
+    #받는 쪽에서 지정한 특정 event_type을 가진 request가 있다면, 실행합니다.
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: cluster-1 # TODO: update to cluster name
