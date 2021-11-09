@@ -14,7 +14,7 @@ spec:
         app: mnist-classifier
     spec:
       containers:
-        - image: gcr.io/abstract-flame-330901/mnist_classifier_bentoml:29f325e0
+        - image: gcr.io/abstract-flame-330901/mnist_classifier_bentoml:a4747dba
           imagePullPolicy: Always
           name: mnist-classifier
           ports:
