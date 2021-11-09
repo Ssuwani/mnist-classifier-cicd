@@ -73,7 +73,7 @@ jobs:
         run: python -m pip install bentoml tensorflow Pillow numpy==1.19.5
 
       - name: Wait until training job complete
-        run: kubectl wait --for=condition=complete --timeout -1 -n mnist job/mnist-train-job-$TAG
+        run: kubectl wait --for=condition=complete --timeout 24h -n mnist job/mnist-train-job-$TAG
 
       - name: Bento Packing
         run: python bentoml/bento_packer.py --model_path gs://suwan/mnist_$TAG
