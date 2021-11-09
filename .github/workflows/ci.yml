@@ -44,7 +44,9 @@ jobs:
 
       # Build the Docker image
       - name: Build
-        run: docker build -t gcr.io/$PROJECT_ID/$TRAIN_IMAGE:$TAG train
+        run: docker build -t gcr.io/$PROJECT_ID/$TRAIN_IMAGE:$TAG \
+          --build-arg ACCESS_TOKEN=${{ secrets.ACCESS_TOKEN}} \
+          train
 
       # Push the Docker image to Google Container Registry
       - name: Publish

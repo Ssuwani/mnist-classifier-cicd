@@ -1,9 +1,16 @@
 import tensorflow as tf
 import argparse
+from utils import trigger_dispatch
 
 
 def get_args():
     parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--ACCESS_TOKEN",
+        type=str,
+        required=True,
+        help="Github Access Token for trigger 'cd' vai dispatch",
+    )
     parser.add_argument(
         "--num_neurons",
         type=int,
@@ -50,6 +57,8 @@ def training(num_neurons, learning_rate, output_model_path):
     print("demo")
 
     model.save(output_model_path)
+
+    trigger_dispatch(args.ACCESS_TOKEN)
 
 
 if __name__ == "__main__":
