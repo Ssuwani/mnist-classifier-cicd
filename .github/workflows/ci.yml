@@ -55,7 +55,7 @@ jobs:
         uses: mikefarah/yq@master
         with:
           cmd: |-
-            ACCESS_TOKEN=$ {{secrets.ACCESS_TOKEN}} yq e -i '.spec.template.spec.containers[0].args[1] = env(DIR)' train/train_job.yaml
+            ACCESS_TOKEN=${{ secrets.ACCESS_TOKEN }} yq e -i '.spec.template.spec.containers[0].args[1] = env(DIR)' train/train_job.yaml
             JOBNAME="mnist-train-job-$TAG" yq e -i '.metadata.name = env(JOBNAME)' train/train_job.yaml
             IMAGE="gcr.io/$PROJECT_ID/$TRAIN_IMAGE:$TAG" yq e -i '.spec.template.spec.containers[0].image = env(IMAGE)' train/train_job.yaml
             DIR="gs://suwan/mnist_$TAG" yq e -i '.spec.template.spec.containers[0].args[7] = env(DIR)' train/train_job.yaml

@@ -1,28 +1,12 @@
 import os
 import requests
-
+from github import Github
 
 def trigger_dispatch(ACCESS_TOKEN):
 
-    OWNER = "ssuwani"
-    REPO = "mnist-classifier-cicd"
-    VERSION = "v1"
-
-    headers = {
-        "Accept": "application/vnd.github.v3+json",
-        "Authorization": f"token {ACCESS_TOKEN}",
-    }
-
-    data = {
-        "event_type": "FINISH_TRAINING",
-        "client_payload": {
-            "version": VERSION
-        }
-    }
-
-    requests.post(
-        f"https://api.github.com/repos/{OWNER}/{REPO}/dispatches",
-        data=data,
-        headers=headers
-    )
+    github_token = ACCESS_TOKEN
+    g = Github(github_token)
+    g.get_user("ssuwani").get_repo("mnist-classifier-cicd").create_repository_dispatch("FINISH_TRAINING")
+    
     print("Trigger CD workflow")
+
